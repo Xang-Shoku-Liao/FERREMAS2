@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FERREMAS</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <ul id="productos"></ul>
+
+    <script>
+        fetch('/api/productos/')
+            .then(res => res.json())
+            .then(data => {
+                const contenedor = document.getElementById('productos');
+                data.forEach(p => {
+                    contenedor.innerHTML += `<li>${p.nombre} - $${p.precio}</li>`;
+                });
+            });
+    </script>
+</body>
+</html>

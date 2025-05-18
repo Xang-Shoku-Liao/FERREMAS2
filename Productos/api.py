@@ -6,3 +6,4 @@ class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = ProductoSerializer
+    search_fields = ['nombre']
