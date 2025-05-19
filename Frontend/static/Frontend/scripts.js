@@ -92,9 +92,47 @@ async function buscar() {
 }
 
 function pagarCarrito() {
-    alert('¡Gracias por tu compra!');
-    localStorage.removeItem('carrito');
-    mostrarCarrito();
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    let total = 0;
+    carrito.forEach(item => {
+        const producto = productos.find(p => p.id === item.id);
+        if (producto) {
+            total += producto.precio * item.cantidad;
+        }
+    });
+
+    fetch('/pagar/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ carrito: carrito, total: total })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.url) {
+            window.location.href = data.url; // Redirige a Transbank
+        } else {
+            alert('Error al iniciar el pago');
+        }
+    });
+}
+
+// Función para obtener el CSRF token (si usas CSRF)
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 document.getElementById('search-btn').addEventListener('click', buscar);
