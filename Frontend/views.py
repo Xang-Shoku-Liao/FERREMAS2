@@ -35,7 +35,24 @@ def retorno(request):
     total = request.session.get('total', 0)
     fecha = datetime.now()
 
+    estado_pago = "desconocido"
     detalle = []
+    respuesta_transbank = None
+    razon_rechazo = ""
+
+    if token:
+        try:
+            respuesta_transbank = Transaction().commit(token)
+            if respuesta_transbank['status'] == 'AUTHORIZED':
+                estado_pago = "aceptado"
+            else:
+                estado_pago = "rechazado"
+                razon_rechazo = respuesta_transbank.get('response_code', 'Sin información')
+        except Exception as e:
+            estado_pago = "error"
+            razon_rechazo = str(e)
+
+    # Armar detalle de productos
     for item in carrito:
         try:
             producto = Producto.objects.get(id=item['id'])
@@ -55,4 +72,6 @@ def retorno(request):
         'carrito': detalle,
         'total': total,
         'fecha': fecha,
+        'estado_pago': estado_pago,
+        'razon_rechazo': razon_rechazo,
     })
