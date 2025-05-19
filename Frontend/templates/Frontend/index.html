@@ -1,69 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>FERREMAS</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 30px; }
-        #search-bar { width: 300px; padding: 8px; }
-        #search-btn { padding: 8px 16px; }
-        #results { margin-top: 30px; }
-        .result-item { padding: 10px; border-bottom: 1px solid #ddd; }
-    </style>
+    <link rel="stylesheet" href="{% static 'Frontend/styles.css' %}">
 </head>
 <body>
     <h1>Lista de Productos</h1>
     <input type="text" id="search-bar" placeholder="Buscar productos...">
     <button id="search-btn">Buscar</button>
     <div id="results"></div>
+    <div id="carrito"></div>
 
-<script>
-    async function obtenerProductos() {
-        const response = await fetch('/api/productos/');
-        if (!response.ok) {
-            return [];
-        }
-        return await response.json();
-    }
-
-    function mostrarResultados(resultados) {
-        const resultsDiv = document.getElementById('results');
-        resultsDiv.innerHTML = '';
-        if (resultados.length === 0) {
-            resultsDiv.innerHTML = '<p>No se encontraron productos.</p>';
-            return;
-        }
-        resultados.forEach(producto => {
-            const item = document.createElement('div');
-            item.className = 'result-item';
-            item.innerHTML = `
-                <strong>ID:</strong> ${producto.id} - <strong>${producto.nombre}</strong> - $${producto.precio}
-                ${producto.imagen ? `<br><img src="${producto.imagen}" alt="${producto.nombre}" style="max-width:150px;max-height:150px;">` : ''}
-            `;
-            resultsDiv.appendChild(item);
-        });
-    }
-
-    let productos = [];
-
-    async function buscar() {
-        const query = document.getElementById('search-bar').value.toLowerCase();
-        const resultados = productos.filter(p =>
-            p.nombre.toLowerCase().includes(query)
-        );
-        mostrarResultados(resultados);
-    }
-
-    document.getElementById('search-btn').addEventListener('click', buscar);
-    document.getElementById('search-bar').addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') buscar();
-    });
-
-    // Al cargar la página, obtener productos de la API
-    obtenerProductos().then(data => {
-        console.log("Productos recibidos:", data);
-        productos = data;
-        mostrarResultados(productos);
-    });
-</script>
+    <script src="{% static 'Frontend/scripts.js' %}"></script>
 </body>
 </html>
