@@ -35,7 +35,10 @@
         resultados.forEach(producto => {
             const item = document.createElement('div');
             item.className = 'result-item';
-            item.textContent = `id: ${producto.id} - ${producto.nombre} - $${producto.precio}`;
+            item.innerHTML = `
+                <strong>ID:</strong> ${producto.id} - <strong>${producto.nombre}</strong> - $${producto.precio}
+                ${producto.imagen ? `<br><img src="${producto.imagen}" alt="${producto.nombre}" style="max-width:150px;max-height:150px;">` : ''}
+            `;
             resultsDiv.appendChild(item);
         });
     }

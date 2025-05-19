@@ -7,3 +7,4 @@ class Producto(models.Model):
     codigo = models.CharField(max_length=100)
     nombre = models.CharField(max_length=100)
     precio = models.IntegerField(default=0)
+    imagen = models.ImageField(upload_to='productos/', null=True, blank=True)
