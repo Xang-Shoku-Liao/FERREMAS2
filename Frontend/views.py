@@ -4,6 +4,7 @@ import json
 from transbank.webpay.webpay_plus.transaction import Transaction
 from django.shortcuts import render
 from Productos.models import Producto
+from .utils import obtener_valor_dolar
 from datetime import datetime
 
 @csrf_exempt
@@ -75,3 +76,36 @@ def retorno(request):
         'estado_pago': estado_pago,
         'razon_rechazo': razon_rechazo,
     })
+
+def lista_productos(request):
+    productos = Producto.objects.all()
+    valor_dolar = obtener_valor_dolar()
+    productos_con_dolar = []
+    for producto in productos:
+        precio_usd = round(producto.precio / valor_dolar, 2) if valor_dolar else 0
+        productos_con_dolar.append({
+            'nombre': producto.nombre,
+            'marca': producto.marca,
+            'precio_clp': producto.precio,
+            'precio_usd': precio_usd,
+        })
+    return render(request, 'frontend/index.html', {
+        'productos': productos_con_dolar,
+        'valor_dolar': valor_dolar,
+    })
+
+def api_productos(request):
+    productos = Producto.objects.all()
+    valor_dolar = obtener_valor_dolar()
+    productos_json = []
+    for producto in productos:
+        precio_usd = round(producto.precio / valor_dolar, 2) if valor_dolar else 0
+        productos_json.append({
+            'id': producto.id,
+            'nombre': producto.nombre,
+            'marca': producto.marca,
+            'precio': producto.precio,
+            'precio_usd': precio_usd,  # <-- asegúrate de incluir este campo
+            'imagen': producto.imagen.url if producto.imagen else None,
+        })
+    return JsonResponse(productos_json, safe=False)

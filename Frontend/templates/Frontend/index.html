@@ -12,6 +12,21 @@
     <div id="results"></div>
     <div id="carrito"></div>
 
+    <!-- <h2>Lista de productos</h2>
+    <ul>
+        {% for producto in productos %}
+            <li>
+                <strong>{{ producto.nombre }}</strong> ({{ producto.marca }})<br>
+                <span>
+                    <b>Precio:</b>
+                    <span style="color: #388e3c;">${{ producto.precio_clp }} CLP</span>
+                    /
+                    <span style="color: #1976d2;">${{ producto.precio_usd }} USD</span>
+                </span>
+            </li>
+        {% endfor %}
+    </ul> -->
+
     <script src="{% static 'Frontend/scripts.js' %}"></script>
 </body>
 </html>

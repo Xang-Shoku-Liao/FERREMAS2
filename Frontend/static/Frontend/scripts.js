@@ -1,7 +1,7 @@
 let productos = [];
 
 async function obtenerProductos() {
-    const response = await fetch('/api/productos/');
+    const response = await fetch('/api_productos/');
     if (!response.ok) {
         return [];
     }
@@ -19,7 +19,12 @@ function mostrarResultados(resultados) {
         const item = document.createElement('div');
         item.className = 'result-item';
         item.innerHTML = `
-            <strong>ID:</strong> ${producto.id} - <strong>${producto.nombre}</strong> - $${producto.precio}
+            <strong>ID:</strong> ${producto.id} - <strong>${producto.nombre}</strong>
+            <br>
+            <b>Precio:</b>
+            <span style="color: #388e3c;">$${producto.precio} CLP</span>
+            /
+            <span style="color: #1976d2;">$${producto.precio_usd} USD</span>
             ${producto.imagen ? `<br><img src="${producto.imagen}" alt="${producto.nombre}" style="max-width:150px;max-height:150px;">` : ''}
             <br><button onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
         `;
@@ -52,19 +57,22 @@ function mostrarCarrito() {
         return;
     }
     let total = 0;
+    let total_usd = 0;
     let html = '<h2>Carrito de compras</h2><ul>';
     carrito.forEach(item => {
         const producto = productos.find(p => p.id === item.id);
         if (producto) {
             const subtotal = producto.precio * item.cantidad;
+            const subtotal_usd = producto.precio_usd * item.cantidad;
             total += subtotal;
+            total_usd += subtotal_usd;
             html += `<li>
-                ${producto.nombre} x ${item.cantidad} = $${subtotal}
+                ${producto.nombre} x ${item.cantidad} = $${subtotal} CLP / $${subtotal_usd.toFixed(2)} USD
                 <button onclick="eliminarDelCarrito(${producto.id})">Eliminar</button>
             </li>`;
         }
     });
-    html += `</ul><strong>Total: $${total}</strong><br>`;
+    html += `</ul><span class="total-carrito">Total: $${total} CLP / $${total_usd.toFixed(2)} USD</span><br>`;
     html += `<button onclick="pagarCarrito()">Pagar</button>`;
     carritoDiv.innerHTML = html;
 }
@@ -140,7 +148,6 @@ document.getElementById('search-bar').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') buscar();
 });
 
-// Al cargar la página, obtener productos de la API
 obtenerProductos().then(data => {
     console.log("Productos recibidos:", data);
     productos = data;
