@@ -9,10 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    {# Carga tu CSS global o principal PRIMERO #}
-    <link rel="stylesheet" href="{% static 'Frontend/style.css' %}"> 
-    {# Luego, carga tu CSS específico para la página de contacto #}
-    <link rel="stylesheet" href="{% static 'Frontend/contacto.css' %}"> 
+    <link rel="stylesheet" href="{% static 'Frontend/index2.css' %}"> 
+    {# Luego, carga tu CSS específico para la página de contacto #} 
     
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{% static 'Frontend/scripts.js' %}"></script>
@@ -26,20 +24,19 @@
                 <h1>FERREMAS</h1>
             </a>
         </div>
-    
         <ul class="nav-links">
-            <li class="link"><a href="{% url 'index' %}">Inicio</a></li>
-            <li class="link"><a href="{% url 'productos' %}">Productos</a></li>
-            <li class="link"><a class="active" href="{% url 'contacto' %}">Contacto</a></li>
-            <li class="link"><a href="{% url 'nosotros' %}">Nosotros</a></li>
+            <li class="link"><a {% if request.resolver_match.url_name == 'index' %}class="active"{% endif %} href="{% url 'index' %}">Inicio</a></li>
+            <li class="link"><a {% if request.resolver_match.url_name == 'productos' %}class="active"{% endif %} href="{% url 'productos' %}">Productos</a></li>
+            <li class="link"><a {% if request.resolver_match.url_name == 'contacto' %}class="active"{% endif %} href="{% url 'contacto' %}">Contacto</a></li>
+            <li class="link"><a {% if request.resolver_match.url_name == 'nosotros' %}class="active"{% endif %} href="{% url 'nosotros' %}">Nosotros</a></li>
         </ul>
-    
         {% if user.is_authenticated %}
             <span class="username">Hola, {{ user.username }}</span>
             <a href="{% url 'logout' %}" class="Logoutbtn">Cerrar sesión</a>
         {% else %}
             <div class="btn-group">
-                <button class="Regbtn" onclick="window.location.href='{% url 'registro' %}'">Registrarse</button>
+                <a href="{% url 'login' %}" class="Loginbtn">Iniciar Sesión</a>
+                <a href="{% url 'registro' %}" class="Regbtn">Registrarse</a>
             </div>
         {% endif %}
     </nav>

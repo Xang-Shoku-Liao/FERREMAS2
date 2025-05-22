@@ -14,14 +14,12 @@
         <form method="POST" novalidate>
             {% csrf_token %}
 
-            {# Campo de Nombre de usuario #}
             <label for="{{ form.username.id_for_label }}">Nombre de usuario:</label>
             {{ form.username }}
             {% if form.username.errors %}
                 <div class="error">{% for error in form.username.errors %}{{ error }}{% endfor %}</div>
             {% endif %}
 
-            {# Campo de Contraseña (una sola) #}
             <label for="{{ form.password.id_for_label }}">Contraseña:</label>
             {{ form.password }}
             {% if form.password.errors %}

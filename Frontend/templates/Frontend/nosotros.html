@@ -19,14 +19,21 @@
                 <h1>FERREMAS</h1>
             </a>
         </div>
-
         <ul class="nav-links">
-            <li class="link"><a href="{% url 'index' %}">Inicio</a></li>
-            <li class="link"><a href="{% url 'productos' %}">Productos</a></li>
-            <li class="link"><a href="{% url 'contacto' %}">Contacto</a></li>
-            <li class="link"><a href="{% url 'nosotros' %}">Nosotros</a></li>
+            <li class="link"><a {% if request.resolver_match.url_name == 'index' %}class="active"{% endif %} href="{% url 'index' %}">Inicio</a></li>
+            <li class="link"><a {% if request.resolver_match.url_name == 'productos' %}class="active"{% endif %} href="{% url 'productos' %}">Productos</a></li>
+            <li class="link"><a {% if request.resolver_match.url_name == 'contacto' %}class="active"{% endif %} href="{% url 'contacto' %}">Contacto</a></li>
+            <li class="link"><a {% if request.resolver_match.url_name == 'nosotros' %}class="active"{% endif %} href="{% url 'nosotros' %}">Nosotros</a></li>
         </ul>
-        <button class="Regbtn">Registrarse</button>
+        {% if user.is_authenticated %}
+            <span class="username">Hola, {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="Logoutbtn">Cerrar sesión</a>
+        {% else %}
+            <div class="btn-group">
+                <a href="{% url 'login' %}" class="Loginbtn">Iniciar Sesión</a>
+                <a href="{% url 'registro' %}" class="Regbtn">Registrarse</a>
+            </div>
+        {% endif %}
     </nav>
 
     <div class="container"> <h2 class="header">Sobre FERREMAS</h2>

@@ -29,7 +29,7 @@
         </div>
     
         <ul class="nav-links">
-            <li class="link"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="link"><a {% if request.resolver_match.url_name == 'index' %}class="active"{% endif %} href="{% url 'index' %}">Inicio</a></li>
             <li class="link"><a href="{% url 'productos' %}">Productos</a></li>
             <li class="link"><a href="{% url 'contacto' %}">Contacto</a></li>
             <li class="link"><a href="{% url 'nosotros' %}">Nosotros</a></li>

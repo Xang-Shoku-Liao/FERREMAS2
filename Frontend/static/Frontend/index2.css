@@ -37,10 +37,11 @@ nav {
 }
 
 .nav-logo h1 {
-    font-weight: 700;
-    font-size: 1.8rem;
+    color: #2196f3; /* O el color que uses en index */
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0;
     letter-spacing: 1px;
-    cursor: default;
 }
 
 .nav-links {
@@ -60,6 +61,16 @@ nav {
 .nav-links .link a:hover {
     background-color: #0056b3;
     color: #fff;
+}
+
+/* Destaca el enlace activo del navbar */
+.nav-links .active {
+    color: #fff !important;
+    background: #1565c0;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: bold;
+    transition: background 0.2s;
 }
 
 /* Botones Generales (Regbtn, Loginbtn) */
@@ -992,4 +1003,24 @@ body.login-body .login-container .Regbtn:hover {
 .precio-usd {
     color: #1976d2 !important;
     font-weight: bold;
+}
+
+body.contacto-body .container {
+    max-width: 700px;
+    margin: 40px auto 0 auto;
+    padding: 32px 32px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+body.contacto-body input,
+body.contacto-body textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
 }

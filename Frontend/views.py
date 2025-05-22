@@ -10,6 +10,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
 from django.contrib import messages
 from django import forms
+from .forms import SimpleUserRegistrationForm
 
 # Formulario de contacto de Nacho
 class ContactoForm(forms.Form):
@@ -37,18 +38,20 @@ def productos(request):
     return render(request, 'Frontend/productos.html')
 
 def registro(request):
-    from django.contrib.auth.models import User
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        # Puedes agregar más validaciones aquí
-        if not User.objects.filter(username=username).exists():
-            User.objects.create_user(username=username, password=password)
+        form = SimpleUserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            auth_login(request, user)
             messages.success(request, 'Registro exitoso. ¡Bienvenido!')
-            return redirect('login')
+            return redirect('index')
         else:
-            messages.error(request, 'El usuario ya existe')
-    return render(request, 'Frontend/registro.html')
+            messages.error(request, 'Por favor corrige los errores en el formulario.')
+    else:
+        form = SimpleUserRegistrationForm()
+    return render(request, 'Frontend/registro.html', {'form': form})
 
 def login(request):
     if request.method == 'POST':
