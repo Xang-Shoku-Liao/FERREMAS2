@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Iniciar Sesión - FERREMAS</title>
+    <link rel="stylesheet" href="{% static 'Frontend/index2.css' %}">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form method="POST" novalidate>
+            {% csrf_token %}
+
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="error">{{ form.username.errors }}</div>
+            {% endif %}
+
+            <label for="{{ form.password.id_for_label }}">Contraseña:</label>
+            {{ form.password }}
+            {% if form.password.errors %}
+                <div class="error">{{ form.password.errors }}</div>
+            {% endif %}
+
+            <button type="submit" class="Regbtn">Ingresar</button>
+        </form>
+
+        <p class="link-register">
+            ¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a>
+        </p>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

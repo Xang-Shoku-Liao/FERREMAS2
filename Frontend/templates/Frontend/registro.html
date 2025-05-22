@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registro - FERREMAS</title>
+    {# Carga tu CSS específico para el registro #}
+    <link rel="stylesheet" href="{% static 'Frontend/index2.css' %}"> 
+</head>
+<body class="registro-body">
+    <div class="registro-container">
+        <h2>Registro</h2>
+        <form method="POST" novalidate>
+            {% csrf_token %}
+
+            {# Campo de Nombre de usuario #}
+            <label for="{{ form.username.id_for_label }}">Nombre de usuario:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="error">{% for error in form.username.errors %}{{ error }}{% endfor %}</div>
+            {% endif %}
+
+            {# Campo de Contraseña (una sola) #}
+            <label for="{{ form.password.id_for_label }}">Contraseña:</label>
+            {{ form.password }}
+            {% if form.password.errors %}
+                <div class="error">{% for error in form.password.errors %}{{ error }}{% endfor %}</div>
+            {% endif %}
+
+            <button type="submit" class="Regbtn">Registrar</button>
+        </form>
+
+        <p class="link-login">
+            ¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a> {# Asegúrate que 'login' sea el nombre de tu URL de login #}
+        </p>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>

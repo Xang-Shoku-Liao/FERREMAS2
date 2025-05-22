@@ -2,10 +2,74 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from transbank.webpay.webpay_plus.transaction import Transaction
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from Productos.models import Producto
 from .utils import obtener_valor_dolar
 from datetime import datetime
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login as auth_login, logout as auth_logout, authenticate
+from django.contrib import messages
+from django import forms
+
+# Formulario de contacto de Nacho
+class ContactoForm(forms.Form):
+    nombre = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    mensaje = forms.CharField(widget=forms.Textarea)
+
+def contacto(request):
+    if request.method == 'POST':
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            # Aquí podrías guardar el mensaje o enviarlo por email
+            messages.success(request, 'Mensaje enviado correctamente.')
+            return redirect('contacto')
+        else:
+            messages.error(request, 'Por favor corrige los errores.')
+    else:
+        form = ContactoForm()
+    return render(request, 'Frontend/contacto.html', {'form': form})
+
+def nosotros(request):
+    return render(request, 'Frontend/nosotros.html')
+
+def productos(request):
+    return render(request, 'Frontend/productos.html')
+
+def registro(request):
+    from django.contrib.auth.models import User
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        # Puedes agregar más validaciones aquí
+        if not User.objects.filter(username=username).exists():
+            User.objects.create_user(username=username, password=password)
+            messages.success(request, 'Registro exitoso. ¡Bienvenido!')
+            return redirect('login')
+        else:
+            messages.error(request, 'El usuario ya existe')
+    return render(request, 'Frontend/registro.html')
+
+def login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            auth_login(request, user)
+            messages.success(request, f'Bienvenido {user.username}')
+            return redirect('index')
+        else:
+            messages.error(request, 'Usuario o contraseña incorrectos.')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'Frontend/login.html', {'form': form})
+
+def logout(request):
+    auth_logout(request)
+    messages.info(request, 'Has cerrado sesión correctamente.')
+    return redirect('index')
+
+# --- Aquí siguen tus funciones originales, no se borra nada ---
 
 @csrf_exempt
 def pagar(request):
@@ -27,8 +91,8 @@ def pagar(request):
 
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-def home(request):
-    return render(request, 'frontend/index.html')
+def index(request):
+    return render(request, 'Frontend/index.html')
 
 def retorno(request):
     token = request.GET.get('token_ws')
@@ -58,9 +122,9 @@ def retorno(request):
         try:
             producto = Producto.objects.get(id=item['id'])
             detalle.append({
-                'nombre': producto.nombre,
-                'marca': producto.marca,
-                'cantidad': item['cantidad'],
+                "producto": producto.nombre,
+                "cantidad": item['cantidad'],
+                "subtotal": producto.precio * item['cantidad']
             })
         except Producto.DoesNotExist:
             detalle.append({
@@ -88,8 +152,9 @@ def lista_productos(request):
             'marca': producto.marca,
             'precio_clp': producto.precio,
             'precio_usd': precio_usd,
+            'imagen': producto.imagen,  # si tienes imágenes
         })
-    return render(request, 'frontend/index.html', {
+    return render(request, 'Frontend/productos.html', {
         'productos': productos_con_dolar,
         'valor_dolar': valor_dolar,
     })
@@ -105,7 +170,7 @@ def api_productos(request):
             'nombre': producto.nombre,
             'marca': producto.marca,
             'precio': producto.precio,
-            'precio_usd': precio_usd,  # <-- asegúrate de incluir este campo
+            'precio_usd': precio_usd,
             'imagen': producto.imagen.url if producto.imagen else None,
         })
     return JsonResponse(productos_json, safe=False)

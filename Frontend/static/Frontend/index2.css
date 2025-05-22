@@ -1,0 +1,995 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+/* Navbar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #003366;
+    padding: 15px 30px;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-logo h1 {
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    cursor: default;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links .link a {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links .link a:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Botones Generales (Regbtn, Loginbtn) */
+.Regbtn, .Loginbtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.Regbtn:hover, .Loginbtn:hover {
+    background-color: #0056b3;
+}
+
+/* Card base (para uso general si aplica, como en features, productos y pricing) */
+.card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 30px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card span {
+    font-size: 3rem;
+    color: #007bff;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.card h4 {
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #003366;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.card a {
+    font-weight: 600;
+    color: #007bff;
+    font-size: 0.9rem;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer.container {
+    background-color: #003366;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 40px 30px;
+    gap: 30px;
+}
+
+footer .column {
+    flex: 1 1 200px;
+    min-width: 180px;
+}
+
+footer .logo h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+footer .socials a {
+    font-size: 1.8rem;
+    margin-right: 15px;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+footer .socials a:hover {
+    color: #f2a900;
+}
+
+footer a {
+    display: block;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    text-align: center;
+    background-color: #002244;
+    color: #bbb;
+    padding: 15px 10px;
+    font-size: 0.85rem;
+}
+
+/* ========================================================================= */
+/* ESTILOS ESPECÍFICOS PARA LA PÁGINA DE INICIO (INDEX.HTML)                */
+/* ESTOS SON LOS ESTILOS QUE ME PROPORCIONASTE ORIGINALMENTE PARA INDEX    */
+/* Y NO ESTÁN ENCAPSULADOS CON CLASES DE BODY.                              */
+/* ========================================================================= */
+
+header.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 30px;
+    background: linear-gradient(135deg, #0056b3 0%, #003366 100%);
+    color: white;
+    min-height: 400px;
+    gap: 30px;
+}
+
+header .content {
+    flex: 1;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+header h1 span {
+    color: #f2a900;
+}
+
+header p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+/* Ajuste para el botón Regbtn en el header si es más grande */
+header .Regbtn {
+    font-size: 1.1rem;
+    padding: 12px 25px;
+}
+
+header .image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Intro Section (en la página de inicio) */
+.intro {
+    padding: 50px 30px;
+    background-color: #fff;
+}
+
+/* Login Popup (si lo tienes implementado, este CSS está bien) */
+.loginPopup {
+    display: none; /* Controlado por JavaScript para mostrar/ocultar */
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+
+.login-form {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    width: 350px;
+    position: relative;
+}
+
+.login-form h1 {
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.login-form label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.login-form input,
+.login-form select {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.login-form input:focus,
+.login-form select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.login-form button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.closex {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 1.8rem;
+    color: #555;
+    cursor: pointer;
+}
+
+/* Features Cards (para la página de inicio) */
+.container h2.header { /* Este selector ya existía en tu código original para index */
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #003366;
+}
+
+.features { /* Contenedor de las cards de features en index.html */
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+/* Pricing Section (para la página de inicio) */
+.pricing {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+}
+
+.pricing .card {
+    width: 280px; /* Ancho específico para cards de pricing */
+    background: #003366;
+    color: white;
+    padding: 30px 25px;
+    border-radius: 10px;
+}
+
+.pricing .card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.pricing .card h3 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #f2a900;
+}
+
+.pricing .card p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+.pricing .btn {
+    background-color: #f2a900;
+    border: none;
+    color: #003366;
+    padding: 12px 25px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.pricing .btn:hover {
+    background-color: #d18c00;
+}
+
+
+/* ========================================================================= */
+/* ***** ESTILOS ESPECÍFICOS PARA LA PÁGINA DE LISTA DE PRODUCTOS ***** */
+/* ========================================================================= */
+
+/* Contenedor principal de la sección de productos (el cuadro blanco) */
+body.productos-body .container { /* Usamos body.productos-body para mayor especificidad */
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* El título "Lista de Productos" */
+body.productos-body h1 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #003366;
+}
+
+/* Contenedor para la barra de búsqueda y el botón */
+body.productos-body .search-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* La barra de búsqueda */
+body.productos-body #search-bar {
+    padding: 8px 10px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+/* El botón de búsqueda */
+body.productos-body #search-btn {
+    padding: 8px 18px;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+body.productos-body #search-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Contenedor de las tarjetas de productos */
+body.productos-body .productos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Estilo para cada tarjeta de producto (la que contiene la imagen) */
+body.productos-body .productos-grid .card {
+    width: 280px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.productos-body .productos-grid .card:hover {
+    transform: translateY(-8px);
+}
+
+/* REGLA CLAVE PARA LAS IMÁGENES DENTRO DE LAS TARJETAS DE PRODUCTOS */
+body.productos-body .productos-grid .card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+body.productos-body .productos-grid .card h4 {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #003366;
+}
+
+body.productos-body .productos-grid .card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+body.productos-body .productos-grid .card .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    width: auto;
+}
+
+body.productos-body .productos-grid .card .btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* ========================================================================= */
+/* ***** ESTILOS ESPECÍFICOS PARA LA PÁGINA "NOSOTROS" ***** */
+/* ========================================================================= */
+
+body.nosotros-body {
+    background-color: #f1f5f9; /* un gris claro más elegante */
+}
+
+/* Ajustes solo para el contenedor de "Nosotros" */
+body.nosotros-body .container { /* Usamos body.nosotros-body para mayor especificidad */
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* Título principal de la sección Nosotros */
+body.nosotros-body h2.header {
+    font-size: 2.2rem;
+    color: #003366;
+    margin-bottom: 20px;
+    text-align: center; /* Centrar el título */
+}
+
+/* Párrafos de la sección Nosotros */
+body.nosotros-body p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 18px;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+
+/* ========================================================================= */
+/* ***** ESTILOS ESPECÍFICOS PARA LA PÁGINA "CONTACTO" - CORREGIDOS ***** */
+/* ========================================================================= */
+
+body.contacto-body {
+    background-color: #f4f8fc; /* Un gris claro más elegante para el fondo */
+    display: flex; /* Usar flexbox para centrar el contenedor principal */
+    flex-direction: column; /* Apilar elementos verticalmente */
+    justify-content: flex-start; /* Alinea al inicio, dejando espacio para el navbar */
+    align-items: center;
+    min-height: calc(100vh - 100px); /* Ajusta para que el footer no se superponga */
+    /* El 100px es un estimado de la altura del navbar + footer para que el contenido no se pegue */
+    padding-top: 50px; /* Espacio para que el formulario no se pegue al navbar */
+}
+
+body.contacto-body .container {
+    max-width: 500px; /* Ancho más compacto para el formulario de contacto */
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 40px; /* Margen inferior para separar del footer */
+    width: 90%; /* Asegura que no sea demasiado ancho en pantallas pequeñas */
+}
+
+body.contacto-body h2 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+body.contacto-body form label { /* Estilo para las etiquetas de los campos */
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+body.contacto-body form input[type="text"],
+body.contacto-body form input[type="email"],
+body.contacto-body form textarea { /* Estilo para los campos de entrada */
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+    resize: vertical; /* Permite redimensionar el textarea verticalmente */
+}
+
+body.contacto-body form input[type="text"]:focus,
+body.contacto-body form input[type="email"]:focus,
+body.contacto-body form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+body.contacto-body button.Regbtn { /* Selector específico para el botón de envío si tiene la clase Regbtn */
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+    width: 100%; /* El botón ocupa todo el ancho del formulario */
+    margin-top: 10px; /* Pequeño margen superior para separar del último campo */
+}
+
+body.contacto-body button.Regbtn:hover {
+    background-color: #0056b3;
+}
+
+/* Los mensajes de validación de Django */
+body.contacto-body .messages {
+    list-style: none;
+    margin-top: 20px;
+    padding: 0; /* Asegura que no haya padding */
+    text-align: center;
+    width: 100%; /* Para que los mensajes también se centren si el .container es más ancho */
+}
+
+body.contacto-body .messages li {
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    display: inline-block; /* Para centrar si la lista es corta */
+    max-width: 100%; /* Asegura que no se desborde */
+}
+
+body.contacto-body .messages li.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1.5px solid #c3e6cb;
+}
+
+body.contacto-body .messages li.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1.5px solid #f5c6cb;
+}
+
+/* Estilo para mensajes de error de campo individual (general, no solo contacto) */
+.error {
+    color: #d9534f;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+/* ========================================================================= */
+/* ***** ESTILOS PARA FORMULARIOS DE REGISTRO Y LOGIN ***** */
+/* ========================================================================= */
+
+body.registro-body .registro-container,
+body.login-body .login-container {
+    max-width: 400px;
+    margin: 60px auto 80px;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    color: #003366;
+    font-weight: 600;
+}
+
+body.registro-body .registro-container h2,
+body.login-body .login-container h2 {
+    margin-bottom: 25px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+body.registro-body .registro-container form label,
+body.login-body .login-container form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #003366;
+}
+
+body.registro-body .registro-container form input,
+body.login-body .login-container form input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+body.registro-body .registro-container form input:focus,
+body.login-body .login-container form input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Botón de envío en formularios de registro/login */
+body.registro-body .registro-container .Regbtn,
+body.login-body .login-container .Regbtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 0;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+body.registro-body .registro-container .Regbtn:hover,
+body.login-body .login-container .Regbtn:hover {
+    background-color: #0056b3;
+}
+
+/* Enlaces al pie de los formularios (ej. "¿Ya tienes cuenta? Inicia sesión") */
+.link-login,
+.link-register {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #003366;
+}
+
+.link-login a,
+.link-register a {
+    color: #007bff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.link-login a:hover,
+.link-register a:hover {
+    color: #0056b3;
+}
+
+/* Mensajes de feedback de Django (success, error, info) */
+.messages {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.messages li {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.messages li.error {
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+}
+
+.messages li.success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+}
+
+
+/* ========================================================================= */
+/* ***** MEDIA QUERIES (Responsive Design) ***** */
+/* ========================================================================= */
+
+@media (max-width: 900px) {
+    /* Navbar */
+    nav {
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    .nav-logo h1 {
+        font-size: 1.6rem; /* Ajuste para móviles */
+    }
+    .nav-links {
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .Regbtn, .Loginbtn {
+        padding: 8px 15px;
+        font-size: 0.95rem; /* Ajuste para móviles */
+    }
+
+
+    /* Header (solo para index.html) */
+    header.container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 40px 20px;
+    }
+
+    /* Features y Pricing (para index.html) */
+    .features, .pricing {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Productos (para productos.html) */
+    body.productos-body .container {
+        padding: 20px 15px;
+    }
+    body.productos-body .search-area {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    body.productos-body h1 {
+        font-size: 1.9rem;
+        margin-bottom: 0;
+    }
+    body.productos-body #search-bar {
+        width: 100%;
+    }
+    body.productos-body .productos-grid .card {
+        width: calc(50% - 30px);
+        max-width: 350px;
+    }
+
+    /* Nosotros y Contacto */
+    body.nosotros-body .container,
+    body.contacto-body .container {
+        margin: 40px 20px;
+        padding: 30px;
+    }
+
+    /* Formularios de Login/Registro */
+    body.registro-body .registro-container,
+    body.login-body .login-container {
+        margin: 50px 20px;
+        padding: 25px 30px;
+        width: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Navbar */
+    nav {
+        padding: 10px 15px;
+    }
+    .nav-logo h1 {
+        font-size: 1.4rem;
+    }
+    .nav-links {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .nav-links .link a {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    .Regbtn, .Loginbtn {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+    }
+
+    /* Header (solo para index.html) */
+    header.container {
+        padding: 30px 15px;
+        min-height: 250px; /* Un poco menos de altura */
+    }
+    header h1 {
+        font-size: 2rem;
+    }
+    header p {
+        font-size: 0.95rem;
+    }
+    header .Regbtn {
+        font-size: 0.95rem;
+        padding: 9px 18px;
+    }
+
+    /* Intro Section */
+    .intro {
+        padding: 25px 15px;
+    }
+
+    /* Features y Pricing */
+    .card {
+        padding: 20px;
+        width: 95%; /* Las cards ocupan aún más del ancho en móviles muy pequeños */
+    }
+    .card span {
+        font-size: 2.2rem;
+    }
+    .card h4 {
+        font-size: 1.1rem;
+    }
+    .pricing .card {
+        width: 95%;
+    }
+    .pricing .card h3 {
+        font-size: 1.8rem;
+    }
+    .pricing .btn {
+        padding: 9px 18px;
+        font-size: 0.95rem;
+    }
+
+    /* Productos (para productos.html) */
+    body.productos-body .container {
+        padding: 15px 10px;
+    }
+    body.productos-body h1 {
+        font-size: 1.5rem;
+    }
+    body.productos-body #search-bar, body.productos-body #search-btn {
+        padding: 6px 8px;
+        font-size: 0.9rem;
+    }
+    body.productos-body .productos-grid .card {
+        width: 95%;
+    }
+
+    /* Nosotros y Contacto */
+    body.nosotros-body .container,
+    body.contacto-body .container {
+        margin: 25px 15px;
+        padding: 20px;
+    }
+    body.nosotros-body h2.header,
+    body.contacto-body h2 {
+        font-size: 1.7rem;
+    }
+    body.nosotros-body p,
+    body.contacto-body form label,
+    body.contacto-body form input,
+    body.contacto-body form textarea {
+        font-size: 0.95rem;
+    }
+    body.contacto-body button.Regbtn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    /* Formularios de Login/Registro */
+    body.registro-body .registro-container,
+    body.login-body .login-container {
+        margin: 30px 15px;
+        padding: 20px;
+        width: auto;
+    }
+    body.registro-body .registro-container h2,
+    body.login-body .login-container h2 {
+        font-size: 1.7rem;
+    }
+    body.registro-body .registro-container .Regbtn,
+    body.login-body .login-container .Regbtn {
+        font-size: 0.95rem;
+        padding: 10px 0;
+    }
+}
+
+.total-carrito {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #1976d2;
+    background: #e3f2fd;
+    padding: 8px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.precio-clp {
+    color: #388e3c !important;
+    font-weight: bold;
+}
+.precio-usd {
+    color: #1976d2 !important;
+    font-weight: bold;
+}

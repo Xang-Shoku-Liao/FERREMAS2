@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boleta de Compra</title>
+    <link rel="stylesheet" href="{% static 'Frontend/retorno.css' %}" />
+</head>
+<body>
+    <div class="boleta-box">
+        {% if estado_pago == "aceptado" %}
+    <div class="check-container">
+        <span class="checkmark">&#10004;</span>
+    </div>
+    <h1 style="color: #4CAF50;">¡Pago aprobado!</h1>
+{% elif estado_pago == "rechazado" %}
+    <div class="check-container">
+        <span class="checkmark" style="color: #e53935;">&#10008;</span>
+    </div>
+    <h1 style="color: #e53935;">Pago rechazado</h1>
+    {% if razon_rechazo %}
+        <p><strong>Razón del rechazo:</strong> {{ razon_rechazo }}</p>
+    {% endif %}
+{% else %}
+    <h1>Estado del pago: {{ estado_pago }}</h1>
+{% endif %}
+<p><strong>Fecha y hora:</strong> {{ fecha }}</p>
+<h2>Detalle de la compra:</h2>
+<ul>
+    {% for item in carrito %}
+        <li>
+            <strong>{{ item.nombre }}</strong> ({{ item.marca }})<br>
+            Cantidad: {{ item.cantidad }}
+        </li>
+    {% empty %}
+        <li>No hay productos en la boleta.</li>
+    {% endfor %}
+</ul>
+<p><strong>Total pagado:</strong> ${{ total }}</p>
+    </div>
+</body>
+</html>

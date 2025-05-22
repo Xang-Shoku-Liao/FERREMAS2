@@ -1,32 +1,145 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-    <title>FERREMAS</title>
-    <link rel="stylesheet" href="{% static 'Frontend/styles.css' %}">
-</head>
-<body>
-    <h1>Lista de Productos</h1>
-    <input type="text" id="search-bar" placeholder="Buscar productos...">
-    <button id="search-btn">Buscar</button>
-    <div id="results"></div>
-    <div id="carrito"></div>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FERREMAS - Distribuidora de Ferretería y Construcción</title>
 
-    <!-- <h2>Lista de productos</h2>
-    <ul>
-        {% for producto in productos %}
-            <li>
-                <strong>{{ producto.nombre }}</strong> ({{ producto.marca }})<br>
-                <span>
-                    <b>Precio:</b>
-                    <span style="color: #388e3c;">${{ producto.precio_clp }} CLP</span>
-                    /
-                    <span style="color: #1976d2;">${{ producto.precio_usd }} USD</span>
-                </span>
-            </li>
-        {% endfor %}
-    </ul> -->
+    <!-- Íconos Remixicon y FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
+    <!-- Tu CSS local -->
+    <link rel="stylesheet" href="{% static 'Frontend/index2.css' %}">
+
+    <!-- jQuery (opcional si lo usas) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{% static 'Frontend/scripts.js' %}"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <a href="{% url 'index' %}">
+                <h1>FERREMAS</h1>
+            </a>
+        </div>
+    
+        <ul class="nav-links">
+            <li class="link"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="link"><a href="{% url 'productos' %}">Productos</a></li>
+            <li class="link"><a href="{% url 'contacto' %}">Contacto</a></li>
+            <li class="link"><a href="{% url 'nosotros' %}">Nosotros</a></li>
+        </ul>
+    
+        {% if user.is_authenticated %}
+            <span class="username">Hola, {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="Logoutbtn">Cerrar sesión</a>
+        {% else %}
+            <div class="btn-group">
+                <button class="Loginbtn" onclick="window.location.href='{% url 'login' %}'">Iniciar Sesión</button>
+                <button class="Regbtn" onclick="window.location.href='{% url 'registro' %}'">Registrarse</button>
+            </div>
+        {% endif %}
+    </nav>
+    
+
+    <header class="container">
+        <div class="content">
+            <span class="blur"></span>
+            <span class="blur"></span>
+            <h1>Bienvenidos a <span>FERREMAS</span>,<br /> Tu distribuidora de confianza en ferretería y construcción</h1>
+            <p>
+                Desde la década de los 80, ofrecemos una amplia gama de herramientas, materiales eléctricos,
+                pinturas y más, trabajando con las mejores marcas como Bosch, Makita, Stanley y Sika.
+            </p>
+            <a href="{% url 'productos' %}" class="Regbtn">Explora Nuestros Productos</a>
+        </div>
+        <div class="image">
+            <img src="/media/productos/index.jpg" alt="Ferretería FERREMAS" />
+        </div>
+    </header>
+
+    <!-- Sección Cards de Productos Destacados -->
+    <section class="container">
+        <h2 class="header">Productos Destacados</h2>
+        <div class="features">
+            <div class="card">
+                <span><i class="ri-hammer-line"></i></span>
+                <h4>Herramientas Manuales</h4>
+                <p>Martillos, destornilladores, llaves y más para todo tipo de trabajo.</p>
+                <a href="{% url 'productos' %}">Ver Productos <i class="ri-arrow-right-line"></i></a>
+            </div>
+            <div class="card">
+                <span><i class="ri-flashlight-line"></i></span>
+                <h4>Materiales Eléctricos</h4>
+                <p>Cables, enchufes, tableros y accesorios eléctricos seguros y certificados.</p>
+                <a href="{% url 'productos' %}">Ver Productos <i class="ri-arrow-right-line"></i></a>
+            </div>
+            <div class="card">
+                <span><i class="ri-paint-line"></i></span>
+                <h4>Pinturas y Recubrimientos</h4>
+                <p>Pinturas para interiores y exteriores de alta calidad y durabilidad.</p>
+                <a href="{% url 'productos' %}">Ver Productos <i class="ri-arrow-right-line"></i></a>
+            </div>
+            <div class="card">
+                <span><i class="ri-tools-fill"></i></span>
+                <h4>Accesorios y Seguridad</h4>
+                <p>Guantes, cascos, mascarillas y todo lo necesario para tu protección.</p>
+                <a href="{% url 'productos' %}">Ver Productos <i class="ri-arrow-right-line"></i></a>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Footer -->
+    <footer class="container">
+        <span class="blur"></span>
+        <span class="blur"></span>
+        <div class="column">
+            <div class="logo">
+                <h1>FERREMAS</h1>
+            </div>
+            <p>
+                Distribuidora de ferretería y construcción con presencia en todo Chile desde los 80.
+            </p>
+            <div class="socials">
+                <a href="#" target="_blank"><i class="ri-facebook-line"></i></a>
+                <a href="#" target="_blank"><i class="ri-instagram-line"></i></a>
+                <a href="#" target="_blank"><i class="ri-twitter-line"></i></a>
+            </div>
+        </div>
+
+        <div class="column">
+            <h4>Compañía</h4>
+            <a href="#">Negocios</a>
+            <a href="#">Colaboraciones</a>
+            <a href="#">Red</a>
+        </div>
+        <div class="column">
+            <h4>Sobre Nosotros</h4>
+            <a href="#">Historia</a>
+            <a href="#">Equipo</a>
+            <a href="#">Valores</a>
+        </div>
+        <div class="column">
+            <h4>Contacto</h4>
+            <a href="#">Contacto</a>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Términos y Condiciones</a>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        © 2025 FERREMAS - Todos los derechos reservados.
+    </div>
+
+
+
 </body>
+
 </html>

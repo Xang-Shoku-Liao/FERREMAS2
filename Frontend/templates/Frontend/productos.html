@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FERREMAS - Productos</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css" />
+    <link rel="stylesheet" href="{% static 'Frontend/index2.css' %}">
+</head>
+
+<body class="productos-body">
+
+    <nav>
+        <div class="nav-logo">
+            <a href="{% url 'index' %}">
+                <h1>FERREMAS</h1>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="link"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="link"><a href="{% url 'productos' %}">Productos</a></li>
+            <li class="link"><a href="{% url 'contacto' %}">Contacto</a></li>
+            <li class="link"><a href="{% url 'nosotros' %}">Nosotros</a></li>
+        </ul>
+        <button class="Regbtn">Registrarse</button>
+    </nav>
+
+    <div class="productos container"> <h1>Lista de Productos</h1>
+        
+        <div class="search-area"> <input type="text" id="search-bar" placeholder="Buscar productos...">
+            <button id="search-btn">Buscar</button>
+        </div>
+
+        <section class="productos-grid" id="results">
+            {% for producto in productos %}
+                <div class="card">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    {% endif %}
+                    <h4>{{ producto.nombre }}</h4>
+                    <p>{{ producto.marca }}</p>
+                    <p>
+                        <b>Precio:</b>
+                        <span class="precio-clp">${{ producto.precio_clp }} CLP</span>
+                        /
+                        <span class="precio-usd">${{ producto.precio_usd }} USD</span>
+                    </p>
+                </div>
+            {% endfor %}
+        </section>
+    </div> 
+    <div id="carrito" class="container">
+        <!-- ... otros elementos del carrito ... -->
+        <div class="total-carrito">
+            Total: $<span id="total-carrito-monto">0</span> CLP
+        </div>
+    </div>
+
+    <script src="{% static 'Frontend/scripts.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto | FERREMAS</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    {# Carga tu CSS global o principal PRIMERO #}
+    <link rel="stylesheet" href="{% static 'Frontend/style.css' %}"> 
+    {# Luego, carga tu CSS específico para la página de contacto #}
+    <link rel="stylesheet" href="{% static 'Frontend/contacto.css' %}"> 
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{% static 'Frontend/scripts.js' %}"></script>
+</head>
+
+<body class="contacto-body">
+
+    <nav>
+        <div class="nav-logo">
+            <a href="{% url 'index' %}">
+                <h1>FERREMAS</h1>
+            </a>
+        </div>
+    
+        <ul class="nav-links">
+            <li class="link"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="link"><a href="{% url 'productos' %}">Productos</a></li>
+            <li class="link"><a class="active" href="{% url 'contacto' %}">Contacto</a></li>
+            <li class="link"><a href="{% url 'nosotros' %}">Nosotros</a></li>
+        </ul>
+    
+        {% if user.is_authenticated %}
+            <span class="username">Hola, {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="Logoutbtn">Cerrar sesión</a>
+        {% else %}
+            <div class="btn-group">
+                <button class="Regbtn" onclick="window.location.href='{% url 'registro' %}'">Registrarse</button>
+            </div>
+        {% endif %}
+    </nav>
+
+    <main class="container">
+        <h2>Contáctanos</h2>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            
+            {# Renderizado manual de los campos para controlar el HTML y aplicar el CSS #}
+            <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+            {{ form.nombre }}
+            {% if form.nombre.errors %}<div class="error">{% for error in form.nombre.errors %}{{ error }}{% endfor %}</div>{% endif %}
+
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }}
+            {% if form.email.errors %}<div class="error">{% for error in form.email.errors %}{{ error }}{% endfor %}</div>{% endif %}
+
+            <label for="{{ form.mensaje.id_for_label }}">Mensaje:</label>
+            {{ form.mensaje }}
+            {% if form.mensaje.errors %}<div class="error">{% for error in form.mensaje.errors %}{{ error }}{% endfor %}</div>{% endif %}
+
+            <button type="submit" class="Regbtn">Enviar</button>
+        </form>
+    </main>
+
+
+</body>
+</html>

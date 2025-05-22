@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FERREMAS - Nosotros</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css" />
+    <link rel="stylesheet" href="{% static 'Frontend/index2.css' %}">
+    </head>
+
+<body class="nosotros-body">
+
+    <nav>
+        <div class="nav-logo">
+            <a href="{% url 'index' %}">
+                <h1>FERREMAS</h1>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li class="link"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="link"><a href="{% url 'productos' %}">Productos</a></li>
+            <li class="link"><a href="{% url 'contacto' %}">Contacto</a></li>
+            <li class="link"><a href="{% url 'nosotros' %}">Nosotros</a></li>
+        </ul>
+        <button class="Regbtn">Registrarse</button>
+    </nav>
+
+    <div class="container"> <h2 class="header">Sobre FERREMAS</h2>
+
+        <p>
+            En FERREMAS, somos tu aliado confiable en cada proyecto de construcción y mejora del hogar. Con años de experiencia en el sector ferretero, nos hemos consolidado como un referente gracias a nuestra dedicación a la calidad, la variedad de productos y un servicio al cliente excepcional.
+        </p>
+        
+        <p>
+            Nuestra misión es simple: proveer a nuestros clientes con las herramientas, materiales y soluciones que necesitan para hacer realidad sus ideas, desde el pequeño arreglo doméstico hasta grandes obras. Creemos firmemente que cada proyecto merece los mejores insumos y el mejor asesoramiento.
+        </p>
+
+        <p>
+            Contamos con un amplio catálogo que incluye desde herramientas manuales y eléctricas de última generación, hasta materiales de construcción, fijaciones, pinturas, equipos de seguridad y mucho más. Trabajamos con las marcas más reconocidas del mercado para garantizar la durabilidad y eficiencia de cada producto que ofrecemos.
+        </p>
+
+        <p>
+            Pero FERREMAS es más que una ferretería; somos una comunidad. Nuestro equipo está compuesto por expertos apasionados, siempre dispuestos a brindarte la mejor atención, resolver tus dudas y orientarte en la elección del producto perfecto para tus necesidades. Tu éxito es nuestra prioridad.
+        </p>
+
+        <p>
+            Gracias por elegir FERREMAS. Estamos comprometidos a seguir creciendo y mejorando para ofrecerte siempre la mejor experiencia de compra. ¡Esperamos verte pronto en nuestra tienda o explorando nuestro catálogo en línea!
+        </p>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="column">
+                <div class="logo">
+                    <h1>FERREMAS</h1>
+                </div>
+                <div class="socials">
+                    <a href="#"><i class="ri-youtube-fill"></i></a>
+                    <a href="#"><i class="ri-instagram-line"></i></a>
+                    <a href="#"><i class="ri-facebook-fill"></i></a>
+                </div>
+            </div>
+            <div class="column">
+                <h4>Empresa</h4>
+                <a href="{% url 'nosotros' %}">Sobre nosotros</a>
+                <a href="#">Nuestros servicios</a>
+                <a href="#">Política de privacidad</a>
+                <a href="#">Términos y condiciones</a>
+            </div>
+            <div class="column">
+                <h4>Navegación</h4>
+                <a href="{% url 'index' %}">Inicio</a>
+                <a href="{% url 'productos' %}">Productos</a>
+                <a href="{% url 'contacto' %}">Contacto</a>
+            </div>
+            <div class="column">
+                <h4>Contacto</h4>
+                <a href="#">+56 9 1234 5678</a>
+                <a href="#">contacto@ferremas.cl</a>
+                <a href="#">Puerto Montt, Chile</a>
+            </div>
+        </div>
+        <div class="copyright">
+            Copyright © 2024 Ferremas. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script src="{% static 'Frontend/scripts.js' %}"></script>
+    <script src="{% static 'Frontend/login.js' %}"></script>
+</body>
+
+</html>
